@@ -2,7 +2,7 @@
 #
 # * Keep track of movies the user is interested in, and their release dates
 # * Store which movies the user has already watched
-# * Add new users to keep track of their watched movies seperately
+# * Add new users to keep track of their watched movies separately
 #
 #
 # User Interface
