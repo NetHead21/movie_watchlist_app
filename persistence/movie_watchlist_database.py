@@ -1,4 +1,4 @@
-from persistence import DatabaseManager
+from database import DatabaseManager
 from .persistence import PersistenceLayer
 
 
@@ -6,7 +6,7 @@ class MovieWatchlistDatabase(PersistenceLayer):
     def __init__(self):
         self.user_table = "users"
         self.movie_table = "movies"
-        self.user_watch_movie = "user_watch_movie"
+        self.user_watch_movie = "user_movie_watchlist"
 
         self.db = DatabaseManager("movie_watchlist.db")
 
@@ -19,7 +19,7 @@ class MovieWatchlistDatabase(PersistenceLayer):
             self.movie_table,
             {
                 "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
-                "name": "TEXT NOT NULL",
+                "title": "TEXT NOT NULL",
                 "release_date": "DATE",
             },
         )

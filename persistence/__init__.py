@@ -1,1 +1,2 @@
 from .database import DatabaseManager
+from .movie_watchlist_database import MovieWatchlistDatabase

@@ -33,4 +33,4 @@ VALUES
 
 select * from users;
 select * from movies;
-select * from user_watch_movie;
+select * from user_movie_watchlist;
