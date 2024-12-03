@@ -1,4 +1,4 @@
-from database import DatabaseManager
+from .database import DatabaseManager
 from .persistence import PersistenceLayer
 
 
@@ -30,7 +30,7 @@ class MovieWatchlistDatabase(PersistenceLayer):
                 "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
                 "user_id": "INTEGER NOT NULL",
                 "movie_id": "INTEGER NOT NULL",
-                "is_watched": "tinyint default 0",
+                "is_watched": "tinyint default 1",
                 "foreign key (user_id) references users(id)": "",
                 "foreign key (movie_id) references movies(id)": "",
             },
@@ -39,5 +39,5 @@ class MovieWatchlistDatabase(PersistenceLayer):
     def create(self, table_name: str, data: dict) -> None:
         self.db.add(table_name, data)
 
-    def list(self, table_name: str, order_by: str = None) -> list:
+    def list(self, table_name: str, order_by: str = None) -> list[tuple]:
         return self.db.select(table_name, order_by=order_by).fetchall()

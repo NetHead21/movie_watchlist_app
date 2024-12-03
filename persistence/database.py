@@ -9,7 +9,7 @@ class DatabaseManager:
     def __del__(self):
         self.connection.close()
 
-    def _execute(self, statement: str, values=None) -> Cursor:
+    def _execute(self, statement: str, values: object = None) -> Cursor:
         with self.connection:
             cursor = self.connection.cursor()
             cursor.execute(statement, values or [])
@@ -41,17 +41,32 @@ class DatabaseManager:
         )
 
     def select(
-        self, table_name: str, criteria: str = None, order_by: str = None
-    ) -> Cursor:
-        criteria = criteria or {}
+        self, table_name: object, criteria: object = None, order_by: object = None
+    ) -> object:
+        criteria = criteria or ""
+
         query = f"SELECT * FROM {table_name}"
 
         if criteria:
-            placeholders = [f"{column} = ?" for column in criteria.keys()]
-            select_criteria = " AND ".join(placeholders)
-            query += f" WHERE {select_criteria}"
+            query += f" WHERE {criteria}"
 
         if order_by:
             query += f" ORDER BY {order_by}"
 
-        return self._execute(query, tuple(criteria.values()))
+        return self._execute(query)
+
+    def select_with_join(self, data: dict) -> object:
+        criteria = data or {}
+        query = """
+            select
+                movies.title
+            from movies
+            join user_movie_watchlist umw
+            on movies.id = umw.movie_id
+            where umw.user_id = ?;
+        """
+
+        return self._execute(
+            query,
+            (criteria["user_id"],),
+        )

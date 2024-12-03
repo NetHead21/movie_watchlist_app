@@ -1,38 +1,16 @@
-# Project Features
-#
-# * Keep track of movies the user is interested in, and their release dates
-# * Store which movies the user has already watched
-# * Add new users to keep track of their watched movies separately
-#
-#
-# User Interface
-#
-# Welcome to the watchlist app!
-#
-# Please select one of the following options:
-# 1) Add new movie
-#     Movie Name:
-#     Release date (mm/dd/yyyy):
+from presentation import get_option_choice
+from presentation.menu import options
+from presentation.views import print_options
 
 
-# 2) View upcoming movies
-#     -- Upcoming movies --
-#     1: The Matrix (on 11/25/2024)
-#     2: Pulp Fiction (on 11/25/2024)
-# 3) View all movies
-#     -- All movies --
-#     1: Gone Girl (on 11/25/2024)
-#     2: The Matrix (on 11/25/2024)
-#     3: Pulp Fiction (on 11/25/2024)
-# 4) Add watched movie
-#     Username:
-#     Movie ID:
-# 5) View watched movies
-#     Username:
-#     -- Watched movies --
-#     3: Pulp Fiction (on 11/25/2024)
-# 6) Add user to the app
-#     Username:
-# 7) Exit
-#
-# Your Selection:
+def loop() -> None:
+    print_options(options)
+    chosen_option = get_option_choice(options)
+    chosen_option.choose()
+
+    _ = input("Please Enter to return to menu.")
+
+
+if __name__ == "__main__":
+    while True:
+        loop()

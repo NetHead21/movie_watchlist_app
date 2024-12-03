@@ -11,3 +11,9 @@ def print_options(options: dict) -> None:
     for shortcut, option in options.items():
         print(f"{shortcut}: {option}")
     print()
+
+
+def print_results(results: list[tuple[str, ...]]) -> None:
+    clear_screen()
+    for result in results:
+        print(result)

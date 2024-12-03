@@ -1,3 +1,6 @@
+from presentation.views import print_results
+
+
 class Option:
     def __init__(
         self,
@@ -13,12 +16,16 @@ class Option:
 
     def choose(self) -> None:
         data = self.prep_call() if self.prep_call else None
-        succcess, result = (
-            self.command.execute(data) if data else self.command.execute()
-        )
+        success, result = self.command.execute(data) if data else self.command.execute()
 
-        if succcess and isinstance(result, str):
-            print(self.success_message.format(result=result))
+        formatted_result = ""
+        if isinstance(result, list):
+            print_results(result)
+        else:
+            formatted_result = result
 
-    def __str__(self) -> str:
+        if success:
+            print(self.success_message.format(result=formatted_result))
+
+    def __str__(self):
         return self.name

@@ -3,11 +3,11 @@ from abc import ABC, abstractmethod
 
 class PersistenceLayer(ABC):
     @abstractmethod
-    def create(self, table_name: str, data: dict):
+    def create(self, table_name: str, data: dict) -> object:
         raise NotImplementedError("Persistence layers must implement create method.")
 
     @abstractmethod
-    def list(self, table_name: str, order_by: str = None):
+    def list(self, table_name: str, order_by: str = None) -> object:
         raise NotImplementedError("Persistence layers must implement list method.")
 
     # @abstractmethod
